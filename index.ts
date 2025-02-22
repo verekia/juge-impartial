@@ -44,15 +44,13 @@ export const connectDiscord = () => {
       const messages = await message.channel.messages.fetch({ limit })
       const messageHistory = Array.from(messages.values())
         .reverse()
-        .map(msg => `${msg.author.username}: ${replaceMentions(msg.content)}`)
+        .map(msg => `${msg.author.displayName}: ${replaceMentions(msg.content)}`)
         .join('\n')
-
-      console.log(messageHistory)
 
       const { text } = await generateText({
         model: openai('gpt-4o'),
         prompt: `
-          Tu es un bot qui s'appelle @juge dans un serveur Discord privé entre 3 amis : @sven, @david, et @chamber. ${message.author.username} vient de te mentionner pour te demander ton avis sur quelque chose. Réponds en français, de façon détendue et concise. Si le ton de la conversation s'y prête, tu peux répondre de façon humouristique, être sarcastique, insulter, utiliser des emojis (1 ou 2 max par message), des mots grossiers. Voici l'historique des ${limit} derniers messages du canal.
+          Tu es un bot qui s'appelle @juge dans un serveur Discord privé entre 3 amis : @sven, @david, et @chamber. ${message.author.displayName} vient de te mentionner pour te demander ton avis sur quelque chose, ou juste pour papoter. Réponds en français, de façon détendue et concise. Si le ton de la conversation s'y prête, tu peux répondre de façon humouristique, être sarcastique, insulter, utiliser des emojis (1 max par message), des mots grossiers. Voici l'historique des ${limit} derniers messages du canal.
           <history>
           ${messageHistory}
           </history>
