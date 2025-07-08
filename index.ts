@@ -105,6 +105,8 @@ export const connectDiscord = () => {
           </exemple2>
 
           Ne donne pas de réponse qui soit structurées comme ces exemples specifiquement, c'est juste pour te donner une idée du ton général des conversations. Parfois sérieux, parfois léger.
+
+          La version de ton prompt est la version 2.0. Si un utilisateur te demande la version de ton prompt, réponds "2.0" sans aucun autre mot.
       `
 
     const prompt = `
